@@ -1,5 +1,5 @@
 /* Tailwind v4 — single import replaces @tailwind directives */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Custom theme tokens (replaces tailwind.config.cjs) */
 @theme {
