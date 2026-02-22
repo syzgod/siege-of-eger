@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-parchment: #fcf5e5;
+  --color-iron: #2b2b2b;
+}
+
+body {
+  background-color: var(--color-parchment);
+  color: var(--color-iron);
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+
+  // Subtle "paper" texture effect
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    pointer-events: none;
+    background-image: url('https://www.transparenttextures.com/patterns/p6.png'); // Light grain
+    z-index: 9999;
+  }
+}
+
+// A reusable "Card" class that looks like a scroll
+@layer components {
+  .medieval-card {
+    @apply bg-parchment border-2 border-wood/20 rounded-sm shadow-md p-6;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
+  }
+}
