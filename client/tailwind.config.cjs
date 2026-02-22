@@ -3,6 +3,11 @@ module.exports = {
   content: ['./src/**/*.{html,ts}'],
   theme: {
     extend: {
+      fontFamily: {
+        display: ['MedievalSharp', 'serif'],
+        ui: ['Marcellus', 'serif'],
+        body: ['EB Garamond', 'serif'],
+      },
       colors: {
         // Your Historical Palette
         iron: '#434343',
