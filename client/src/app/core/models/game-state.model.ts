@@ -1,14 +1,6 @@
-import { z } from 'zod';
+import { GameStateSchema, type GameState } from '@shared/models/game-state.schema';
 
-export const GameStateSchema = z.object({
-  day: z.number().int().min(1),
-  wood: z.number().min(0),
-  iron: z.number().min(0),
-  food: z.number().min(0),
-  morale: z.number().min(0).max(100),
-});
-
-export type GameState = z.infer<typeof GameStateSchema>;
+export { GameStateSchema, type GameState };
 
 export const INITIAL_GAME_STATE: GameState = {
   day: 1,
