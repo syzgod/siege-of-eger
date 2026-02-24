@@ -7,11 +7,11 @@
   <div class="grid grid-cols-4 gap-6 w-full max-w-4xl mb-8">
     <div class="medieval-card text-center">
       <span class="block text-sm uppercase text-wood/60">Day</span>
-      <span class="text-3xl font-bold">1</span>
+      <span class="text-3xl font-bold">{{ gameData.value()?.day ?? '--' }}</span>
     </div>
     <div class="medieval-card text-center border-b-4 border-b-gold">
       <span class="block text-sm uppercase text-wood/60">Wood</span>
-      <span class="text-3xl font-bold">500</span>
+      <span class="text-3xl font-bold">{{ gameData.value()?.wood ?? '0' }}</span>
     </div>
     <div class="medieval-card text-center border-b-4 border-b-iron">
       <span class="block text-sm uppercase text-wood/60">Iron</span>
@@ -25,7 +25,6 @@
 
   <section class="w-full max-w-4xl medieval-card flex justify-between items-center">
     <div>
-      <h1>{{ statusResource.value() }}</h1>
       <h3 class="text-xl font-bold">Commander's Orders</h3>
       <p class="text-sm">Establish the supply lines before the first Ottoman scouts arrive.</p>
     </div>

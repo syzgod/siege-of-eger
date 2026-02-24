@@ -1,6 +1,7 @@
 import { Component, resource, signal } from '@angular/core';
 
 import { RouterOutlet } from '@angular/router';
+import { GameStateSchema, type GameState } from '@shared/models/game-state.schema';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,11 @@ import { RouterOutlet } from '@angular/router';
 export class App {
   protected readonly title = signal('siege-of-eger-client');
 
-  statusResource = resource({
-    loader: () => fetch('http://localhost:3000').then((res) => res.text()),
+  gameData = resource({
+    loader: async (): Promise<GameState> => {
+      const response = await fetch('http://localhost:3000/game/resources');
+      const data: unknown = await response.json();
+      return GameStateSchema.parse(data);
+    },
   });
 }
