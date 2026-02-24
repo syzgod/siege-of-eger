@@ -3,7 +3,12 @@
     <h1 class="text-5xl font-bold text-blood mb-2 uppercase tracking-widest">Siege of Eger 1552</h1>
     <p class="italic text-wood">"Eger csillagai — Defending the Fortress"</p>
   </header>
-
+  @if (gameData.error()) {
+    <div class="bg-blood/20 border border-blood p-4 text-center">
+      <p class="font-bold text-blood">Messenger failed to arrive!</p>
+      <p class="text-sm italic">{{ gameData.error() }}</p>
+    </div>
+  }
   <div class="grid grid-cols-4 gap-6 w-full max-w-4xl mb-8">
     <div class="medieval-card text-center">
       <span class="block text-sm uppercase text-wood/60">Day</span>

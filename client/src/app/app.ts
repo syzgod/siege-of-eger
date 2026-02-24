@@ -16,6 +16,10 @@ export class App {
   gameData = resource({
     loader: async (): Promise<GameState> => {
       const response = await fetch(`${environment.apiUrl}/game/resources`);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch game resources (Status: ${response.status})`);
+      }
       const data: unknown = await response.json();
       return GameStateSchema.parse(data);
     },
