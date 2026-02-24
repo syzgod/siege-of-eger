@@ -1,7 +1,11 @@
-import { InternalServerErrorException, Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+  Logger,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
-
 import {
   GameStateSchema,
   type GameState,
@@ -19,14 +23,16 @@ type Database = {
 
 @Injectable()
 export class SupabaseService {
-  // This is the main Supabase client used by this service.
   private readonly supabase: SupabaseClient<Database>;
+  // NestJS Logger is better than console.log: it includes timestamps and context.
+  private readonly logger = new Logger(SupabaseService.name);
 
   constructor(private readonly configService: ConfigService) {
     const url = this.configService.get<string>('SUPABASE_URL');
     const key = this.configService.get<string>('SUPABASE_KEY');
 
     if (!url || !key) {
+      this.logger.error('CRITICAL: Supabase credentials missing!');
       throw new Error(
         'Supabase URL and Key must be set in environment variables',
       );
@@ -34,24 +40,36 @@ export class SupabaseService {
     this.supabase = createClient<Database>(url, key);
   }
 
-  // Fetch the latest game state row from Supabase.
   async getGameState(): Promise<GameState> {
-    const response = await this.supabase
+    const { data, error } = await this.supabase
       .from('game_state')
       .select('day, wood, iron, food, morale')
       .single();
 
-    // If Supabase returns a database error, we stop here.
-    if (response.error) {
-      throw response.error;
+    if (error) {
+      this.logger.error(
+        `Database Error: ${error.message} (Code: ${error.code})`,
+      );
+
+      if (error.code === 'PGRST116') {
+        throw new NotFoundException(
+          'No game state found. The fortress is empty.',
+        );
+      }
+
+      throw new InternalServerErrorException(
+        'The scribes are unable to retrieve the records.',
+      );
     }
 
-    // Validate DB payload with Zod before returning it.
-    const parsedState = GameStateSchema.safeParse(response.data);
+    const parsedState = GameStateSchema.safeParse(data);
 
     if (!parsedState.success) {
+      this.logger.warn(
+        `Schema Validation Failed: ${parsedState.error.message}`,
+      );
       throw new InternalServerErrorException(
-        'Supabase returned invalid game_state data',
+        'Data corruption detected in the game state.',
       );
     }
 
