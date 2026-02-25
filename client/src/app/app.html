@@ -3,40 +3,47 @@
     <h1 class="text-5xl font-bold text-blood mb-2 uppercase tracking-widest">Siege of Eger 1552</h1>
     <p class="italic text-wood">"Eger csillagai — Defending the Fortress"</p>
   </header>
-  @if (gameData.error()) {
+
+  @if (gameData.isLoading()) {
+    <div class="flex flex-col items-center gap-4 mt-12">
+      <p-progressSpinner ariaLabel="Loading" />
+      <p class="text-wood italic text-lg">Waking up the Garrison...</p>
+    </div>
+  } @else if (gameData.error()) {
     <div class="bg-blood/20 border border-blood p-4 text-center">
       <p class="font-bold text-blood">Messenger failed to arrive!</p>
       <p class="text-sm italic">{{ gameData.error() }}</p>
     </div>
-  }
-  <div class="grid grid-cols-4 gap-6 w-full max-w-4xl mb-8">
-    <div class="medieval-card text-center">
-      <span class="block text-sm uppercase text-wood/60">Day</span>
-      <span class="text-3xl font-bold">{{ gameData.value()?.day ?? '--' }}</span>
+  } @else {
+    <div class="grid grid-cols-4 gap-6 w-full max-w-4xl mb-8">
+      <div class="medieval-card text-center">
+        <span class="block text-sm uppercase text-wood/60">Day</span>
+        <span class="text-3xl font-bold">{{ gameData.value()?.day ?? '--' }}</span>
+      </div>
+      <div class="medieval-card text-center border-b-4 border-b-gold">
+        <span class="block text-sm uppercase text-wood/60">Wood</span>
+        <span class="text-3xl font-bold">{{ gameData.value()?.wood ?? '0' }}</span>
+      </div>
+      <div class="medieval-card text-center border-b-4 border-b-iron">
+        <span class="block text-sm uppercase text-wood/60">Iron</span>
+        <span class="text-3xl font-bold">{{ gameData.value()?.iron ?? '0' }}</span>
+      </div>
+      <div class="medieval-card text-center border-b-4 border-b-blood">
+        <span class="block text-sm uppercase text-wood/60">Food</span>
+        <span class="text-3xl font-bold">{{ gameData.value()?.food ?? '0' }}</span>
+      </div>
     </div>
-    <div class="medieval-card text-center border-b-4 border-b-gold">
-      <span class="block text-sm uppercase text-wood/60">Wood</span>
-      <span class="text-3xl font-bold">{{ gameData.value()?.wood ?? '0' }}</span>
-    </div>
-    <div class="medieval-card text-center border-b-4 border-b-iron">
-      <span class="block text-sm uppercase text-wood/60">Iron</span>
-      <span class="text-3xl font-bold">200</span>
-    </div>
-    <div class="medieval-card text-center border-b-4 border-b-blood">
-      <span class="block text-sm uppercase text-wood/60">Food</span>
-      <span class="text-3xl font-bold">1000</span>
-    </div>
-  </div>
 
-  <section class="w-full max-w-4xl medieval-card flex justify-between items-center">
-    <div>
-      <h3 class="text-xl font-bold">Commander's Orders</h3>
-      <p class="text-sm">Establish the supply lines before the first Ottoman scouts arrive.</p>
-    </div>
-    <button
-      class="bg-blood text-white px-8 py-3 rounded-sm hover:bg-red-900 transition-colors shadow-lg uppercase font-bold tracking-tighter"
-    >
-      Advance Day
-    </button>
-  </section>
+    <section class="w-full max-w-4xl medieval-card flex justify-between items-center">
+      <div>
+        <h3 class="text-xl font-bold">Commander's Orders</h3>
+        <p class="text-sm">Establish the supply lines before the first Ottoman scouts arrive.</p>
+      </div>
+      <button
+        class="bg-blood text-white px-8 py-3 rounded-sm hover:bg-red-900 transition-colors shadow-lg uppercase font-bold tracking-tighter"
+      >
+        Advance Day
+      </button>
+    </section>
+  }
 </main>
