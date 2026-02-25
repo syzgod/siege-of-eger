@@ -43,7 +43,7 @@ export class SupabaseService {
   async getGameState(): Promise<GameState> {
     const { data, error } = await this.supabase
       .from('game_state')
-      .select('day, wood, iron, food, morale')
+      .select('*')
       .single();
 
     if (error) {

@@ -1,0 +1,51 @@
+import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
+
+import { GameApiService } from '../../../core/services/game-api.service';
+import { effect } from '@angular/core';
+import { inject } from '@angular/core';
+
+export const GameStore = signalStore(
+  { providedIn: 'root' },
+  withState({
+    gameState: null as any | null,
+  }),
+  withMethods((store) => ({
+    spendResources(gold: number, wood: number) {
+      const current = store.gameState();
+      if (!current) return;
+
+      patchState(store, {
+        gameState: {
+          ...current,
+          resources: {
+            ...current.resources,
+            gold: current.resources.gold - gold,
+            wood: current.resources.wood - wood,
+          },
+        },
+      });
+    },
+    advanceDay() {
+      const current = store.gameState();
+      if (!current) return;
+      patchState(store, {
+        gameState: {
+          ...current,
+          day: current.day + 1,
+          gold: current.gold + current.gold_rate,
+          wood: current.wood + current.wood_rate,
+        },
+      });
+    },
+  })),
+  withHooks({
+    onInit(store, api = inject(GameApiService)) {
+      effect(() => {
+        const data = api.gameState.value();
+        if (data) {
+          patchState(store, { gameState: data });
+        }
+      });
+    },
+  }),
+);

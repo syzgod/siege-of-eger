@@ -18,11 +18,15 @@
     <div class="grid grid-cols-4 gap-6 w-full max-w-4xl mb-8">
       <div class="medieval-card text-center">
         <span class="block text-sm uppercase text-wood/60">Day</span>
-        <span class="text-3xl font-bold">{{ gameData.value()?.day ?? '--' }}</span>
+        <span class="text-3xl font-bold">{{
+          gameStore.gameState().day ?? gameData.value()?.day ?? '--'
+        }}</span>
       </div>
       <div class="medieval-card text-center border-b-4 border-b-gold">
         <span class="block text-sm uppercase text-wood/60">Wood</span>
-        <span class="text-3xl font-bold">{{ gameData.value()?.wood ?? '0' }}</span>
+        <span class="text-3xl font-bold">{{
+          gameStore.gameState().wood ?? gameData.value()?.wood ?? '0'
+        }}</span>
       </div>
       <div class="medieval-card text-center border-b-4 border-b-iron">
         <span class="block text-sm uppercase text-wood/60">Iron</span>
@@ -41,6 +45,7 @@
       </div>
       <button
         class="bg-blood text-white px-8 py-3 rounded-sm hover:bg-red-900 transition-colors shadow-lg uppercase font-bold tracking-tighter"
+        (click)="onNextDay()"
       >
         Advance Day
       </button>
