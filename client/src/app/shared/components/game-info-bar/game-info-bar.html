@@ -1,0 +1,68 @@
+<!-- Status Bar -->
+<div class="grid grid-cols-4 gap-6 w-full mb-6">
+  <!-- Day Counter -->
+  <div class="medieval-card flex flex-col items-center justify-center text-center">
+    <span class="block text-sm uppercase text-wood/60 tracking-wider">Day</span>
+    <span class="text-5xl font-bold mt-2">{{ day() }}</span>
+  </div>
+
+  <!-- Days Remaining -->
+  <div class="medieval-card flex flex-col items-center justify-center text-center">
+    <span class="block text-sm uppercase text-wood/60 tracking-wider">Days Remaining</span>
+    <span class="text-5xl font-bold text-blood mt-2" [class.pulse-text]="daysRemaining() < 5" ]>{{
+      daysRemaining()
+    }}</span>
+    <span class="text-xs text-wood/40 italic mt-1">before the siege starts</span>
+  </div>
+
+  <!-- Action Points -->
+  <div class="medieval-card flex flex-col items-center justify-center text-center gap-3">
+    <span class="block text-sm uppercase text-wood/60 tracking-wider">Action Points</span>
+    <span class="text-4xl font-bold text-gold"
+      >{{ actionPoints() }}<span class="text-lg text-wood/40"> / 5</span></span
+    >
+    <p-progressbar
+      [value]="actionPointsPct()"
+      [showValue]="false"
+      [style]="{ height: '10px', width: '100%' }"
+    />
+  </div>
+
+  <!-- Wall Health -->
+  <div class="medieval-card flex flex-col items-center justify-center text-center gap-2">
+    <span class="block text-sm uppercase text-wood/60 tracking-wider">Wall Health</span>
+    <p-knob
+      [ngModel]="wallHealth()"
+      [readonly]="true"
+      [size]="100"
+      [strokeWidth]="8"
+      valueTemplate="{value}%"
+      valueColor="var(--color-blood)"
+      rangeColor="var(--color-wood)"
+      textColor="var(--color-iron)"
+    />
+  </div>
+</div>
+
+<!-- Resources -->
+<div class="grid grid-cols-6 gap-4 w-full mb-6">
+  @for (item of resourceItems(); track item.label) {
+    <div class="medieval-card text-center border-b-4" [style.border-bottom-color]="item.color">
+      <span class="block text-sm uppercase text-wood/60">{{ item.label }}</span>
+      <span class="text-3xl font-bold">{{ item.value }}</span>
+      @if (item.rate !== undefined) {
+        <span class="block text-xs text-wood/40 mt-1">+{{ item.rate }}/day</span>
+      }
+    </div>
+  }
+</div>
+
+<!-- Military -->
+<div class="grid grid-cols-4 gap-4 w-full">
+  @for (item of militaryItems(); track item.label) {
+    <div class="medieval-card text-center border-b-4 border-b-iron">
+      <span class="block text-sm uppercase text-wood/60">{{ item.label }}</span>
+      <span class="text-3xl font-bold">{{ item.value }}</span>
+    </div>
+  }
+</div>

@@ -1,12 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 
 import { GameApiService } from '@app/core/services/game-api.service';
+import { GameInfoBar } from './shared/components/game-info-bar/game-info-bar';
 import { GameStore } from './features/resources/store/game.store';
 import { ProgressSpinner } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-root',
-  imports: [ProgressSpinner],
+  imports: [ProgressSpinner, GameInfoBar],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

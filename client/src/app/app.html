@@ -15,28 +15,7 @@
       <p class="text-sm italic">{{ gameData.error() }}</p>
     </div>
   } @else {
-    <div class="grid grid-cols-4 gap-6 w-full max-w-4xl mb-8">
-      <div class="medieval-card text-center">
-        <span class="block text-sm uppercase text-wood/60">Day</span>
-        <span class="text-3xl font-bold">{{
-          gameStore.gameState()?.day ?? gameData.value()?.day ?? '--'
-        }}</span>
-      </div>
-      <div class="medieval-card text-center border-b-4 border-b-gold">
-        <span class="block text-sm uppercase text-wood/60">Wood</span>
-        <span class="text-3xl font-bold">{{
-          gameStore.gameState()?.resources?.wood ?? gameData.value()?.resources?.wood
-        }}</span>
-      </div>
-      <div class="medieval-card text-center border-b-4 border-b-iron">
-        <span class="block text-sm uppercase text-wood/60">Iron</span>
-        <span class="text-3xl font-bold">{{ gameData.value()?.resources?.iron }}</span>
-      </div>
-      <div class="medieval-card text-center border-b-4 border-b-blood">
-        <span class="block text-sm uppercase text-wood/60">Food</span>
-        <span class="text-3xl font-bold">{{ gameData.value()?.resources?.food }}</span>
-      </div>
-    </div>
+    <app-game-info-bar class="w-full max-w-4xl mb-8" />
 
     <section class="w-full max-w-4xl medieval-card flex justify-between items-center">
       <div>

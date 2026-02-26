@@ -33,10 +33,18 @@ export const GameStore = signalStore(
         gameState: {
           ...current,
           day: current.day + 1,
+          status: {
+            ...current.status,
+            daysRemaining: Math.max(0, current.status.daysRemaining - 1),
+            actionPoints: 5,
+          },
           resources: {
             ...current.resources,
             gold: current.resources.gold + current.gold_rate,
             wood: current.resources.wood + current.wood_rate,
+            iron: current.resources.iron + current.iron_rate,
+            stone: current.resources.stone + current.stone_rate,
+            food: current.resources.food + current.food_rate,
           },
         },
       });
