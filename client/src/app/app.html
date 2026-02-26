@@ -19,22 +19,22 @@
       <div class="medieval-card text-center">
         <span class="block text-sm uppercase text-wood/60">Day</span>
         <span class="text-3xl font-bold">{{
-          gameStore.gameState().day ?? gameData.value()?.day ?? '--'
+          gameStore.gameState()?.day ?? gameData.value()?.day ?? '--'
         }}</span>
       </div>
       <div class="medieval-card text-center border-b-4 border-b-gold">
         <span class="block text-sm uppercase text-wood/60">Wood</span>
         <span class="text-3xl font-bold">{{
-          gameStore.gameState().wood ?? gameData.value()?.wood ?? '0'
+          gameStore.gameState()?.resources?.wood ?? gameData.value()?.resources?.wood
         }}</span>
       </div>
       <div class="medieval-card text-center border-b-4 border-b-iron">
         <span class="block text-sm uppercase text-wood/60">Iron</span>
-        <span class="text-3xl font-bold">{{ gameData.value()?.iron ?? '0' }}</span>
+        <span class="text-3xl font-bold">{{ gameData.value()?.resources?.iron }}</span>
       </div>
       <div class="medieval-card text-center border-b-4 border-b-blood">
         <span class="block text-sm uppercase text-wood/60">Food</span>
-        <span class="text-3xl font-bold">{{ gameData.value()?.food ?? '0' }}</span>
+        <span class="text-3xl font-bold">{{ gameData.value()?.resources?.food }}</span>
       </div>
     </div>
 

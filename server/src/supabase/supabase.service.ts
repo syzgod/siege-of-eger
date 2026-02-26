@@ -1,21 +1,22 @@
 import {
   Injectable,
   InternalServerErrorException,
-  NotFoundException,
   Logger,
+  NotFoundException,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
-import {
-  GameStateSchema,
-  type GameState,
-} from '../../../shared/src/models/game-state.schema';
+
+import { ConfigService } from '@nestjs/config';
+import { RawGameStateSchema } from '../../../shared/src/models/game-state.schema';
+import { z } from 'zod';
+
+type RawGameState = z.infer<typeof RawGameStateSchema>;
 
 type Database = {
   public: {
     Tables: {
       game_state: {
-        Row: GameState;
+        Row: RawGameState;
       };
     };
   };
@@ -24,7 +25,6 @@ type Database = {
 @Injectable()
 export class SupabaseService {
   private readonly supabase: SupabaseClient<Database>;
-  // NestJS Logger is better than console.log: it includes timestamps and context.
   private readonly logger = new Logger(SupabaseService.name);
 
   constructor(private readonly configService: ConfigService) {
@@ -40,7 +40,7 @@ export class SupabaseService {
     this.supabase = createClient<Database>(url, key);
   }
 
-  async getGameState(): Promise<GameState> {
+  async getGameState(): Promise<RawGameState> {
     const { data, error } = await this.supabase
       .from('game_state')
       .select('*')
@@ -62,7 +62,7 @@ export class SupabaseService {
       );
     }
 
-    const parsedState = GameStateSchema.safeParse(data);
+    const parsedState = RawGameStateSchema.safeParse(data);
 
     if (!parsedState.success) {
       this.logger.warn(

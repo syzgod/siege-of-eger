@@ -1,13 +1,14 @@
 import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
 
 import { GameApiService } from '../../../core/services/game-api.service';
+import { GameState } from '@shared/models/game-state.schema';
 import { effect } from '@angular/core';
 import { inject } from '@angular/core';
 
 export const GameStore = signalStore(
   { providedIn: 'root' },
   withState({
-    gameState: null as any | null,
+    gameState: null as GameState | null,
   }),
   withMethods((store) => ({
     spendResources(gold: number, wood: number) {
@@ -32,8 +33,11 @@ export const GameStore = signalStore(
         gameState: {
           ...current,
           day: current.day + 1,
-          gold: current.gold + current.gold_rate,
-          wood: current.wood + current.wood_rate,
+          resources: {
+            ...current.resources,
+            gold: current.resources.gold + current.gold_rate,
+            wood: current.resources.wood + current.wood_rate,
+          },
         },
       });
     },
