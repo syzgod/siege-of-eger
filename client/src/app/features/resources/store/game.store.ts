@@ -2,6 +2,7 @@ import { patchState, signalStore, withHooks, withMethods, withState } from '@ngr
 
 import { GameApiService } from '../../../core/services/game-api.service';
 import { GameState } from '@shared/models/game-state.schema';
+import { UNIT_DEFINITIONS } from '../models/unit-definitions';
 import { effect } from '@angular/core';
 import { inject } from '@angular/core';
 
@@ -36,7 +37,7 @@ export const GameStore = signalStore(
           status: {
             ...current.status,
             daysRemaining: Math.max(0, current.status.daysRemaining - 1),
-            actionPoints: 5,
+            actionPoints: current.status.actionPoints + 5,
           },
           resources: {
             ...current.resources,
@@ -48,6 +49,34 @@ export const GameStore = signalStore(
           },
         },
       });
+    },
+    hireUnit(unitType: string): boolean {
+      const current = store.gameState();
+      const def = UNIT_DEFINITIONS[unitType];
+      if (!current || !def) return false;
+
+      // Check action points
+      if (current.status.actionPoints < def.actionPoints) return false;
+
+      // Check resource costs
+      if (!def.canAfford(current)) return false;
+
+      // Apply costs and deduct AP
+      const updated = def.apply(current);
+      patchState(store, {
+        gameState: {
+          ...updated,
+          status: {
+            ...updated.status,
+            actionPoints: updated.status.actionPoints - def.actionPoints,
+          },
+        },
+      });
+
+      return true;
+    },
+    hireGuard(): boolean {
+      return this.hireUnit('guard');
     },
   })),
   withHooks({

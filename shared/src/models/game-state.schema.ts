@@ -2,15 +2,17 @@ import { z } from 'zod';
 
 // Shared validation schema used by both frontend and backend.
 export const RawGameStateSchema = z.object({
-  daysRemaining: z.number().default(30),
-  actionPoints: z.number().default(5),
-  wallHealth: z.number().default(100),
+  days_remaining: z.number().default(30),
+  action_points: z.number().default(5),
+  wall_health: z.number().default(100),
   gold: z.number().min(0),
   wood: z.number().min(0),
   iron: z.number().min(0),
   stone: z.number().min(0),
   food: z.number().min(0),
   swords: z.number().min(0).default(0),
+  spears: z.number().min(0).default(1),
+  bows: z.number().min(0).default(0),
   guards: z.number().min(0).default(0),
   soldiers: z.number().min(0).default(0),
   archers: z.number().min(0).default(0),
@@ -26,9 +28,9 @@ export const RawGameStateSchema = z.object({
 
 export const GameStateSchema = RawGameStateSchema.transform((db) => ({
   status: {
-    daysRemaining: db.daysRemaining,
-    actionPoints: db.actionPoints,
-    wallHealth: db.wallHealth,
+    daysRemaining: db.days_remaining,
+    actionPoints: db.action_points,
+    wallHealth: db.wall_health,
   },
   resources: {
     gold: db.gold,
@@ -37,6 +39,8 @@ export const GameStateSchema = RawGameStateSchema.transform((db) => ({
     stone: db.stone,
     food: db.food,
     swords: db.swords,
+    spears: db.spears,
+    bows: db.bows,
   },
   military: {
     guards: db.guards,

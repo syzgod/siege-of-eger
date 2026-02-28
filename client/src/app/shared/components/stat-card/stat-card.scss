@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.stat-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  height: 100%;
+  background-color: color-mix(in srgb, var(--color-parchment) 40%, white);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-wood) 15%, transparent);
+}
+
+.stat-dl {
+  margin: 0;
+}
+
+dd {
+  margin-inline-start: 0;
+}

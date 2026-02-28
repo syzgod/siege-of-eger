@@ -7,21 +7,8 @@ import { GameStore } from '@app/features/resources/store/game.store';
   selector: 'app-resource-panel',
   standalone: true,
   imports: [StatCard],
-  template: `
-    <ul class="grid grid-cols-3 sm:grid-cols-6 gap-4 list-none m-0 p-0" role="list">
-      @for (item of items(); track item.label) {
-        <li>
-          <app-stat-card [data]="item" />
-        </li>
-      }
-    </ul>
-  `,
-  styles: `
-    :host {
-      display: block;
-      width: 100%;
-    }
-  `,
+  templateUrl: './resource-panel.html',
+  styleUrl: './resource-panel.scss',
 })
 export class ResourcePanel {
   private readonly store = inject(GameStore);

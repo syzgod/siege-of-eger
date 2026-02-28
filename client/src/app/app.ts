@@ -33,6 +33,7 @@ export class App {
   }
 
   onTrain(unit: string) {
+    this.gameStore.hireGuard();
     console.log(`Training: ${unit}`);
   }
 
