@@ -2,13 +2,13 @@
 <div class="grid grid-cols-4 gap-6 w-full mb-6">
   <!-- Day Counter -->
   <div class="medieval-card flex flex-col items-center justify-center text-center">
-    <span class="block text-sm uppercase text-wood/60 tracking-wider">Day</span>
+    <span class="block text-sm uppercase text-wood/60 tracking-wider">📅 Day</span>
     <span class="text-5xl font-bold mt-2">{{ day() }}</span>
   </div>
 
   <!-- Days Remaining -->
   <div class="medieval-card flex flex-col items-center justify-center text-center">
-    <span class="block text-sm uppercase text-wood/60 tracking-wider">Days Remaining</span>
+    <span class="block text-sm uppercase text-wood/60 tracking-wider">⏳ Days Remaining</span>
     <span class="text-5xl font-bold text-blood mt-2" [class.pulse-text]="daysRemaining() < 5" ]>{{
       daysRemaining()
     }}</span>
@@ -17,7 +17,7 @@
 
   <!-- Action Points -->
   <div class="medieval-card flex flex-col items-center justify-center text-center gap-3">
-    <span class="block text-sm uppercase text-wood/60 tracking-wider">Action Points</span>
+    <span class="block text-sm uppercase text-wood/60 tracking-wider">⚡ Action Points</span>
     <span class="text-4xl font-bold text-gold"
       >{{ actionPoints() }}<span class="text-lg text-wood/40"> / 5</span></span
     >
@@ -30,7 +30,7 @@
 
   <!-- Wall Health -->
   <div class="medieval-card flex flex-col items-center justify-center text-center gap-2">
-    <span class="block text-sm uppercase text-wood/60 tracking-wider">Wall Health</span>
+    <span class="block text-sm uppercase text-wood/60 tracking-wider">🏰 Wall Health</span>
     <p-knob
       [ngModel]="wallHealth()"
       [readonly]="true"
@@ -45,24 +45,30 @@
 </div>
 
 <!-- Resources -->
-<div class="grid grid-cols-6 gap-4 w-full mb-6">
-  @for (item of resourceItems(); track item.label) {
-    <div class="medieval-card text-center border-b-4" [style.border-bottom-color]="item.color">
-      <span class="block text-sm uppercase text-wood/60">{{ item.label }}</span>
-      <span class="text-3xl font-bold">{{ item.value }}</span>
-      @if (item.rate !== undefined) {
-        <span class="block text-xs text-wood/40 mt-1">+{{ item.rate }}/day</span>
-      }
-    </div>
-  }
-</div>
+<fieldset class="info-fieldset mb-6">
+  <legend class="info-legend">Resources</legend>
+  <div class="grid grid-cols-6 gap-4 w-full">
+    @for (item of resourceItems(); track item.label) {
+      <div class="medieval-card text-center border-b-4" [style.border-bottom-color]="item.color">
+        <span class="block text-sm uppercase text-wood/60">{{ item.label }}</span>
+        <span class="text-3xl font-bold">{{ item.value }}</span>
+        @if (item.rate !== undefined) {
+          <span class="block text-xs text-wood/40 mt-1">+{{ item.rate }}/day</span>
+        }
+      </div>
+    }
+  </div>
+</fieldset>
 
-<!-- Military -->
-<div class="grid grid-cols-4 gap-4 w-full">
-  @for (item of militaryItems(); track item.label) {
-    <div class="medieval-card text-center border-b-4 border-b-iron">
-      <span class="block text-sm uppercase text-wood/60">{{ item.label }}</span>
-      <span class="text-3xl font-bold">{{ item.value }}</span>
-    </div>
-  }
-</div>
+<!-- Troops -->
+<fieldset class="info-fieldset">
+  <legend class="info-legend">Troops</legend>
+  <div class="grid grid-cols-4 gap-4 w-full">
+    @for (item of militaryItems(); track item.label) {
+      <div class="medieval-card text-center border-b-4 border-b-iron">
+        <span class="block text-sm uppercase text-wood/60">{{ item.label }}</span>
+        <span class="text-3xl font-bold">{{ item.value }}</span>
+      </div>
+    }
+  </div>
+</fieldset>

@@ -1,33 +1,35 @@
-<main class="min-h-screen p-8 flex flex-col items-center">
-  <header class="text-center mb-12">
-    <h1 class="text-5xl font-bold text-blood mb-2 uppercase tracking-widest">Siege of Eger 1552</h1>
+<main class="min-h-screen p-6 flex flex-col items-center" role="main">
+  <header class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-blood mb-1 uppercase tracking-widest">Siege of Eger 1552</h1>
     <p class="italic text-wood">"Eger csillagai — Defending the Fortress"</p>
   </header>
 
   @if (gameData.isLoading()) {
-    <div class="flex flex-col items-center gap-4 mt-12">
-      <p-progressSpinner ariaLabel="Loading" />
+    <aside class="flex flex-col items-center gap-4 mt-12" aria-live="polite">
+      <p-progressSpinner ariaLabel="Loading game data" />
       <p class="text-wood italic text-lg">Waking up the Garrison...</p>
-    </div>
+    </aside>
   } @else if (gameData.error()) {
-    <div class="bg-blood/20 border border-blood p-4 text-center">
+    <aside class="bg-blood/20 border border-blood p-4 text-center" role="alert">
       <p class="font-bold text-blood">Messenger failed to arrive!</p>
       <p class="text-sm italic">{{ gameData.error() }}</p>
-    </div>
+    </aside>
   } @else {
-    <app-game-info-bar class="w-full max-w-4xl mb-8" />
+    <div class="w-full max-w-5xl flex flex-col gap-4">
+      <!-- Status overview -->
+      <app-status-bar />
 
-    <section class="w-full max-w-4xl medieval-card flex justify-between items-center">
-      <div>
-        <h3 class="text-xl font-bold">Commander's Orders</h3>
-        <p class="text-sm">Establish the supply lines before the first Ottoman scouts arrive.</p>
-      </div>
-      <button
-        class="bg-blood text-white px-8 py-3 rounded-sm hover:bg-red-900 transition-colors shadow-lg uppercase font-bold tracking-tighter"
-        (click)="onNextDay()"
-      >
-        Advance Day
-      </button>
-    </section>
+      <!-- Inventory — tabbed to avoid clutter -->
+      <app-inventory-tabs />
+
+      <!-- Commander actions -->
+      <app-commander-orders
+        (advanceDay)="onAdvanceDay()"
+        (build)="onBuild($event)"
+        (craft)="onCraft($event)"
+        (train)="onTrain($event)"
+        (repair)="onRepair($event)"
+      />
+    </div>
   }
 </main>

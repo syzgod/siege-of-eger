@@ -19,3 +19,19 @@
     transform: scale(1);
   }
 }
+
+.info-fieldset {
+  border: 2px dashed var(--color-wood, #8b6914);
+  border-radius: 8px;
+  padding: 1rem 1rem 1rem;
+  width: 100%;
+}
+
+.info-legend {
+  padding: 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-wood, #8b6914);
+}

@@ -1,0 +1,81 @@
+<section class="medieval-card flex flex-col gap-4" aria-labelledby="commander-heading">
+  <header class="flex justify-between items-center">
+    <hgroup>
+      <h2 id="commander-heading" class="text-xl font-bold m-0">Commander's Orders</h2>
+      <p class="text-sm text-wood/60 m-0 mt-1">
+        Establish the supply lines before the first Ottoman scouts arrive.
+      </p>
+    </hgroup>
+    <app-action-btn label="Advance Day" icon="☀️" (pressed)="advanceDay.emit()" />
+  </header>
+
+  <p-tabs [value]="0">
+    <p-tablist>
+      <p-tab [value]="0">🏗️ Build</p-tab>
+      <p-tab [value]="1">⚒️ Craft</p-tab>
+      <p-tab [value]="2">🎯 Training</p-tab>
+      <p-tab [value]="3">🔧 Repair</p-tab>
+    </p-tablist>
+
+    <p-tabpanels>
+      <!-- Build -->
+      <p-tabpanel [value]="0">
+        <app-fieldset-group legend="Build" class="mt-3">
+          <nav class="flex flex-wrap gap-2" aria-label="Build actions">
+            <app-action-btn label="Barricade" icon="🪵" (pressed)="build.emit('barricade')" />
+            <app-action-btn label="Watchtower" icon="🗼" (pressed)="build.emit('watchtower')" />
+            <app-action-btn
+              label="Cannon Emplacement"
+              icon="💣"
+              (pressed)="build.emit('cannon-emplacement')"
+            />
+            <app-action-btn label="Oil Cauldron" icon="🫗" (pressed)="build.emit('oil-cauldron')" />
+            <app-action-btn label="Storehouse" icon="🏚️" (pressed)="build.emit('storehouse')" />
+            <app-action-btn label="Trench" icon="⛏️" (pressed)="build.emit('trench')" />
+          </nav>
+        </app-fieldset-group>
+      </p-tabpanel>
+
+      <!-- Craft -->
+      <p-tabpanel [value]="1">
+        <app-fieldset-group legend="Craft" class="mt-3">
+          <nav class="flex flex-wrap gap-2" aria-label="Craft actions">
+            <app-action-btn label="Sword" icon="⚔️" (pressed)="craft.emit('sword')" />
+            <app-action-btn label="Spear" icon="🔱" (pressed)="craft.emit('spear')" />
+            <app-action-btn label="Bow & Arrow" icon="🏹" (pressed)="craft.emit('bow')" />
+            <app-action-btn label="Shield" icon="🛡️" (pressed)="craft.emit('shield')" />
+            <app-action-btn label="Cannon Ball" icon="💣" (pressed)="craft.emit('cannonball')" />
+            <app-action-btn label="Boiling Oil" icon="🫗" (pressed)="craft.emit('boiling-oil')" />
+          </nav>
+        </app-fieldset-group>
+      </p-tabpanel>
+
+      <!-- Training -->
+      <p-tabpanel [value]="2">
+        <app-fieldset-group legend="Training" class="mt-3">
+          <nav class="flex flex-wrap gap-2" aria-label="Training actions">
+            <app-action-btn label="Guard" icon="🛡️" (pressed)="train.emit('guard')" />
+            <app-action-btn label="Gunner" icon="💥" (pressed)="train.emit('gunner')" />
+            <app-action-btn label="Archer" icon="🏹" (pressed)="train.emit('archer')" />
+            <app-action-btn label="Swordsman" icon="⚔️" (pressed)="train.emit('swordsman')" />
+            <app-action-btn label="Spearman" icon="🔱" (pressed)="train.emit('spearman')" />
+          </nav>
+        </app-fieldset-group>
+      </p-tabpanel>
+
+      <!-- Repair -->
+      <p-tabpanel [value]="3">
+        <app-fieldset-group legend="Repair" class="mt-3">
+          <nav class="flex flex-wrap gap-2" aria-label="Repair actions">
+            <app-action-btn label="Wall" icon="🧱" (pressed)="repair.emit('wall')" />
+            <app-action-btn label="Tower" icon="🗼" (pressed)="repair.emit('tower')" />
+            <app-action-btn label="Gate" icon="🚪" (pressed)="repair.emit('gate')" />
+            <app-action-btn label="Moat" icon="🌊" (pressed)="repair.emit('moat')" />
+            <app-action-btn label="Battlement" icon="🏰" (pressed)="repair.emit('battlement')" />
+            <app-action-btn label="Drawbridge" icon="🌉" (pressed)="repair.emit('drawbridge')" />
+          </nav>
+        </app-fieldset-group>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+</section>

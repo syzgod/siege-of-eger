@@ -35,32 +35,37 @@ export class GameInfoBar {
     const s = this.gameStore.gameState();
     return [
       {
-        label: 'Gold',
+        label: '🪙 Gold',
         value: s?.resources?.gold ?? '--',
         color: 'var(--color-gold)',
         rate: s?.gold_rate,
       },
       {
-        label: 'Wood',
+        label: '🪵 Wood',
         value: s?.resources?.wood ?? '--',
         color: 'var(--color-wood)',
         rate: s?.wood_rate,
       },
       {
-        label: 'Iron',
+        label: '⛏️ Iron',
         value: s?.resources?.iron ?? '--',
         color: 'var(--color-iron)',
         rate: s?.iron_rate,
       },
-      { label: 'Stone', value: s?.resources?.stone ?? '--', color: '#8d8d8d', rate: s?.stone_rate },
       {
-        label: 'Food',
+        label: '🪨 Stone',
+        value: s?.resources?.stone ?? '--',
+        color: '#8d8d8d',
+        rate: s?.stone_rate,
+      },
+      {
+        label: '🍖 Food',
         value: s?.resources?.food ?? '--',
         color: 'var(--color-blood)',
         rate: s?.food_rate,
       },
       {
-        label: 'Swords',
+        label: '⚔️ Swords',
         value: s?.resources?.swords ?? '--',
         color: 'var(--color-iron)',
         rate: undefined,
@@ -71,10 +76,10 @@ export class GameInfoBar {
   protected readonly militaryItems = computed(() => {
     const s = this.gameStore.gameState();
     return [
-      { label: 'Guards', value: s?.military?.guards ?? '--' },
-      { label: 'Soldiers', value: s?.military?.soldiers ?? '--' },
-      { label: 'Archers', value: s?.military?.archers ?? '--' },
-      { label: 'Morale', value: s?.morale != null ? s.morale + '%' : '--' },
+      { label: '🛡️ Guards', value: s?.military?.guards ?? '--' },
+      { label: '⚔️ Soldiers', value: s?.military?.soldiers ?? '--' },
+      { label: '🏹 Archers', value: s?.military?.archers ?? '--' },
+      { label: '🔥 Morale', value: s?.morale != null ? s.morale + '%' : '--' },
     ];
   });
 }

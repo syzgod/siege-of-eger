@@ -41,10 +41,91 @@ body::before {
 
 /* Reusable medieval card component */
 @utility medieval-card {
-  background-color: var(--color-parchment);
-  border: 2px solid color-mix(in srgb, var(--color-wood) 20%, transparent);
-  border-radius: 0.125rem;
-  box-shadow: 0 4px 6px rgb(16 24 40 / 0.08);
-  padding: 1.5rem;
-  background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.3), transparent);
+  background-color: color-mix(in srgb, var(--color-parchment) 90%, var(--color-wood));
+  border: 1px solid color-mix(in srgb, var(--color-wood) 25%, transparent);
+  border-radius: 0.5rem;
+  box-shadow:
+    0 4px 12px rgb(0 0 0 / 0.05),
+    inset 0 0 20px color-mix(in srgb, var(--color-wood) 5%, transparent);
+  padding: 1.25rem;
+  background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.4), transparent);
+}
+
+/* ── PrimeNG Tabs — medieval theme overrides (global) ── */
+
+body .p-tabs {
+  background: transparent !important;
+  color: var(--color-iron) !important;
+}
+
+body .p-tablist {
+  background: transparent !important;
+  border-bottom: 2px solid color-mix(in srgb, var(--color-wood) 30%, transparent);
+  border-radius: 0;
+}
+
+body .p-tablist-content {
+  background: transparent !important;
+}
+
+body .p-tablist-tab-list {
+  background: transparent !important;
+  border: none !important;
+}
+
+body .p-tab {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 0 !important;
+  color: var(--color-wood) !important;
+  font-family: var(--font-ui, 'Marcellus', serif);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.65rem 1rem;
+  transition: all 0.2s ease;
+}
+
+body .p-tab:hover:not(.p-tab-active) {
+  color: var(--color-blood) !important;
+  background: color-mix(in srgb, var(--color-blood) 6%, transparent) !important;
+}
+
+body .p-tab.p-tab-active {
+  color: var(--color-blood) !important;
+  border-bottom-color: var(--color-blood) !important;
+  background: color-mix(in srgb, var(--color-blood) 8%, transparent) !important;
+}
+
+body .p-tablist-active-bar {
+  background: var(--color-blood) !important;
+  height: 3px;
+  border-radius: 0;
+}
+
+body .p-tabpanels {
+  background: transparent !important;
+  color: var(--color-iron) !important;
+  padding: 0 !important;
+}
+
+body .p-tabpanel {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+body .p-tablist-nav-button {
+  color: var(--color-wood) !important;
+  background: color-mix(in srgb, var(--color-parchment, #fcf5e5) 90%, transparent) !important;
+}
+
+body .p-tablist-nav-button:hover {
+  color: var(--color-blood) !important;
+  background: color-mix(in srgb, var(--color-parchment, #fcf5e5) 90%, transparent) !important;
+}
+
+.p-tablist-nav-button:hover {
+  color: var(--color-blood) !important;
 }
