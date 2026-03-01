@@ -16,37 +16,55 @@ interface UnitConfig {
 }
 
 function defineUnit(config: UnitConfig): UnitCost {
+  const { actionPoints, costs = {}, military = {}, rates = {} } = config;
   return {
     actionPoints: config.actionPoints,
 
-    canAfford: (s) => {
-      for (const key in config.costs) {
-        const k = key as keyof GameState['resources'];
-        if (s.resources[k] < config.costs[k]!) return false;
+    // Can we afford it?
+    canAfford: (s: GameState) => {
+      // Loop through each cost defined in the config
+      // Object.keys gives us ['gold', 'wood', etc.]
+      for (const resource of Object.keys(costs) as Array<keyof GameState['resources']>) {
+        const costAmount = costs[resource] ?? 0;
+        if (s.resources[resource] < costAmount) {
+          return false; // Stop immediately if we can't afford one item
+        }
       }
       return true;
     },
 
-    apply: (s) => {
+    // Apply the changes
+    apply: (s: GameState) => {
+      // Create shallow copies of the nested objects to keep it "Immutable"
       const resources = { ...s.resources };
-      for (const key in config.costs) {
-        const k = key as keyof GameState['resources'];
-        resources[k] = resources[k] - config.costs[k]!;
+      const currentMilitary = { ...s.military };
+      const updatedState = { ...s };
+
+      // Subtract Costs
+      for (const res of Object.keys(costs) as Array<keyof GameState['resources']>) {
+        resources[res] -= costs[res] ?? 0;
       }
 
-      const military = { ...s.military };
-      for (const key in config.military) {
-        const k = key as keyof GameState['military'];
-        military[k] = military[k] + config.military[k]!;
+      // Add Military Units
+      for (const unit of Object.keys(military) as Array<keyof GameState['military']>) {
+        currentMilitary[unit] += military[unit] ?? 0;
       }
 
-      let state = { ...s, resources, military };
-      for (const key in config.rates) {
-        const k = key as keyof typeof config.rates;
-        (state as any)[k] = (s as any)[k] + config.rates[k]!;
+      // Update Rates (Root level)
+      for (const rate of Object.keys(rates) as Array<keyof typeof rates>) {
+        // We use brackets to update the specific rate like state['gold_rate']
+        const rateKey = rate as keyof GameState;
+        if (typeof updatedState[rateKey] === 'number') {
+          (updatedState[rateKey] as number) += rates[rate] ?? 0;
+        }
       }
 
-      return state;
+      // Return the final merged state
+      return {
+        ...updatedState,
+        resources,
+        military: currentMilitary,
+      };
     },
   };
 }

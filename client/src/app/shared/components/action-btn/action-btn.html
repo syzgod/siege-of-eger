@@ -1,11 +1,28 @@
-<button
-  type="button"
-  class="flex items-center justify-center gap-2 bg-blood text-white px-3 sm:px-4 py-2 rounded-md hover:bg-red-900 transition-all shadow-md hover:shadow-lg uppercase font-bold tracking-wider text-[11px] sm:text-sm border border-red-950/50 w-full sm:w-auto"
-  [attr.aria-label]="label()"
-  (click)="pressed.emit()"
->
-  @if (icon()) {
-    <span class="text-sm sm:text-base shrink-0">{{ icon() }}</span>
+<div class="tooltip-wrapper">
+  <button
+    type="button"
+    [disabled]="disabled()"
+    class="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-md transition-all shadow-md uppercase font-bold tracking-wider text-[11px] sm:text-sm border w-full sm:w-auto"
+    [class]="
+      disabled()
+        ? 'bg-stone-600 text-stone-400 border-stone-700 cursor-not-allowed opacity-50'
+        : 'bg-blood text-white border-red-950/50 hover:bg-red-900 hover:shadow-lg'
+    "
+    [attr.aria-label]="label()"
+    (click)="handleClick()"
+  >
+    @if (icon()) {
+      <span
+        class="text-sm sm:text-base shrink-0"
+        [class.grayscale]="disabled()"
+        [class.opacity-50]="disabled()"
+        >{{ icon() }}</span
+      >
+    }
+    <span class="truncate">{{ label() }}</span>
+  </button>
+
+  @if (disabled() && disabledReason()) {
+    <span class="scroll-tooltip">📜 {{ disabledReason() }}</span>
   }
-  <span class="truncate">{{ label() }}</span>
-</button>
+</div>

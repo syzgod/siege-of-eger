@@ -3,12 +3,11 @@ import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GameStore } from '@app/features/resources/store/game.store';
 import { KnobModule } from 'primeng/knob';
-import { ProgressBar } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-status-bar',
   standalone: true,
-  imports: [KnobModule, FormsModule, ProgressBar],
+  imports: [KnobModule, FormsModule],
   templateUrl: './status-bar.html',
   styleUrl: './status-bar.scss',
 })
@@ -25,9 +24,5 @@ export class StatusBar {
   protected readonly wallHealth = computed(
     () => this.gameStore.gameState()?.status?.wallHealth ?? 0,
   );
-
-  protected readonly actionPointsPct = computed(() => {
-    const ap = this.actionPoints();
-    return typeof ap === 'number' ? (ap / 5) * 100 : 0;
-  });
+  protected readonly morale = computed(() => this.gameStore.gameState()?.morale ?? 0);
 }

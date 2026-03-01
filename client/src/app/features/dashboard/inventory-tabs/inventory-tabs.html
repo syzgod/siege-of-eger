@@ -3,7 +3,8 @@
     <p-tablist>
       <p-tab [value]="0">🪙 Resources</p-tab>
       <p-tab [value]="1">⚔️ Troops</p-tab>
-      <p-tab [value]="2">📦 Consumption</p-tab>
+      <p-tab [value]="2">�‍🌾 Population</p-tab>
+      <p-tab [value]="3">📦 Consumption</p-tab>
     </p-tablist>
 
     <p-tabpanels>
@@ -20,6 +21,12 @@
       </p-tabpanel>
 
       <p-tabpanel [value]="2">
+        <div class="pt-4">
+          <app-population-panel />
+        </div>
+      </p-tabpanel>
+
+      <p-tabpanel [value]="3">
         <div class="pt-4">
           <app-consumption-panel />
         </div>

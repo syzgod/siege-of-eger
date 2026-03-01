@@ -50,33 +50,41 @@ export const GameStore = signalStore(
         },
       });
     },
-    hireUnit(unitType: string): boolean {
+    trainUnit(unitType: string): boolean {
       const current = store.gameState();
       const def = UNIT_DEFINITIONS[unitType];
-      if (!current || !def) return false;
 
-      // Check action points
-      if (current.status.actionPoints < def.actionPoints) return false;
+      if (!current || !def || current.population.peasants < 1) {
+        console.warn('No peasants left to train!');
+        return false;
+      }
 
-      // Check resource costs
-      if (!def.canAfford(current)) return false;
+      // Check resource costs and action points
+      if (!def.canAfford(current) || current.status.actionPoints < def.actionPoints) {
+        console.warn('Cannot afford a guard (Check AP or Spears)!');
+        return false;
+      }
 
       // Apply costs and deduct AP
-      const updated = def.apply(current);
+      const updatedByDef = def.apply(current);
       patchState(store, {
         gameState: {
-          ...updated,
+          ...updatedByDef,
+          population: {
+            ...updatedByDef.population,
+            peasants: updatedByDef.population.peasants - 1,
+          },
           status: {
-            ...updated.status,
-            actionPoints: updated.status.actionPoints - def.actionPoints,
+            ...updatedByDef.status,
+            actionPoints: updatedByDef.status.actionPoints - def.actionPoints,
           },
         },
       });
 
       return true;
     },
-    hireGuard(): boolean {
-      return this.hireUnit('guard');
+    trainGuard(): boolean {
+      return this.trainUnit('guard');
     },
   })),
   withHooks({

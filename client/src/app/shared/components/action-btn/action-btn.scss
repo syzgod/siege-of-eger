@@ -1,3 +1,73 @@
 :host {
   display: inline-block;
 }
+
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.scroll-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 240px;
+  padding: 8px 14px;
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #3e2723;
+  background: linear-gradient(135deg, #f5e6c8 0%, #e8d5a3 50%, #f0deb8 100%);
+  border: 2px solid #8d6e47;
+  border-radius: 4px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  z-index: 50;
+  pointer-events: none;
+  white-space: normal;
+  text-transform: none;
+  font-weight: normal;
+  letter-spacing: normal;
+
+  // Parchment texture effect
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  // Arrow pointing down
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #8d6e47;
+  }
+}
+
+.tooltip-wrapper:hover .scroll-tooltip {
+  display: block;
+  animation: unfurl 0.2s ease-out;
+}
+
+@keyframes unfurl {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}

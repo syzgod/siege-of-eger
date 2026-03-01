@@ -54,7 +54,17 @@
       <p-tabpanel [value]="2">
         <app-fieldset-group legend="Training" class="mt-3">
           <nav class="flex flex-wrap gap-2" aria-label="Training actions">
-            <app-action-btn label="Guard" icon="🛡️" (pressed)="train.emit('guard')" />
+            <app-action-btn
+              label="Guard"
+              icon="🛡️"
+              (pressed)="train.emit('guard')"
+              [disabled]="
+                (gameStore.gameState()?.status?.actionPoints ?? 0) < 1 ||
+                (gameStore.gameState()?.resources?.spears ?? 0) < 1 ||
+                (gameStore.gameState()?.population?.peasants ?? 0) < 1
+              "
+              [disabledReason]="getGuardDisabledReason()"
+            />
             <app-action-btn label="Gunner" icon="💥" (pressed)="train.emit('gunner')" />
             <app-action-btn label="Archer" icon="🏹" (pressed)="train.emit('archer')" />
             <app-action-btn label="Swordsman" icon="⚔️" (pressed)="train.emit('swordsman')" />

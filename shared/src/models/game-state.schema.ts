@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 // Shared validation schema used by both frontend and backend.
 export const RawGameStateSchema = z.object({
+  id: z.string().uuid(),
   days_remaining: z.number().default(30),
   action_points: z.number().default(5),
   wall_health: z.number().default(100),
@@ -13,6 +14,9 @@ export const RawGameStateSchema = z.object({
   swords: z.number().min(0).default(0),
   spears: z.number().min(0).default(1),
   bows: z.number().min(0).default(0),
+  pop_peasants: z.number().default(400),
+  pop_civilians: z.number().default(300),
+  pop_wounded: z.number().default(0),
   guards: z.number().min(0).default(0),
   soldiers: z.number().min(0).default(0),
   archers: z.number().min(0).default(0),
@@ -41,6 +45,11 @@ export const GameStateSchema = RawGameStateSchema.transform((db) => ({
     swords: db.swords,
     spears: db.spears,
     bows: db.bows,
+  },
+  population: {
+    peasants: db.pop_peasants,
+    civilians: db.pop_civilians,
+    wounded: db.pop_wounded,
   },
   military: {
     guards: db.guards,

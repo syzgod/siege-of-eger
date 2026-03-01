@@ -34,12 +34,6 @@ export class TroopsPanel {
         value: s?.military?.archers ?? '--',
         accentColor: 'var(--color-iron)',
       },
-      {
-        label: 'Morale',
-        icon: '🔥',
-        value: s?.morale != null ? s.morale + '%' : '--',
-        accentColor: 'var(--color-gold)',
-      },
     ];
   });
 }
