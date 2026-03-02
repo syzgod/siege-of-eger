@@ -1,5 +1,6 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from 'primeng/tabs';
 
+import { ArmoryPanel } from '../armory-panel/armory-panel';
 import { Component } from '@angular/core';
 import { ConsumptionPanel } from '../consumption-panel/consumption-panel';
 import { PopulationPanel } from '../population-panel/population-panel';
@@ -15,6 +16,7 @@ import { TroopsPanel } from '../troops-panel/troops-panel';
     Tab,
     TabPanels,
     TabPanel,
+    ArmoryPanel,
     ResourcePanel,
     TroopsPanel,
     ConsumptionPanel,

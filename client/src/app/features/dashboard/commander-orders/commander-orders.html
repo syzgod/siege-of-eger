@@ -66,8 +66,26 @@
               [disabledReason]="getGuardDisabledReason()"
             />
             <app-action-btn label="Gunner" icon="💥" (pressed)="train.emit('gunner')" />
-            <app-action-btn label="Archer" icon="🏹" (pressed)="train.emit('archer')" />
-            <app-action-btn label="Swordsman" icon="⚔️" (pressed)="train.emit('swordsman')" />
+            <app-action-btn
+              label="Archer"
+              icon="🏹"
+              (pressed)="train.emit('archer')"
+              [disabled]="
+                (gameStore.gameState()?.status?.actionPoints ?? 0) < 1 ||
+                (gameStore.gameState()?.resources?.bows ?? 0) < 1 ||
+                (gameStore.gameState()?.population?.peasants ?? 0) < 1
+              "
+            />
+            <app-action-btn
+              label="Swordsman"
+              icon="⚔️"
+              (pressed)="train.emit('soldier')"
+              [disabled]="
+                (gameStore.gameState()?.status?.actionPoints ?? 0) < 1 ||
+                (gameStore.gameState()?.resources?.swords ?? 0) < 1 ||
+                (gameStore.gameState()?.population?.peasants ?? 0) < 1
+              "
+            />
             <app-action-btn label="Spearman" icon="🔱" (pressed)="train.emit('spearman')" />
           </nav>
         </app-fieldset-group>

@@ -78,13 +78,37 @@ export const UNIT_DEFINITIONS: Record<string, UnitCost> = {
   }),
 
   soldier: defineUnit({
-    actionPoints: 2,
-    costs: { spears: 1, iron: 1 },
-    rates: { food_rate: -2 },
+    actionPoints: 1,
+    costs: { swords: 1, iron: 1 },
+    rates: { food_rate: -1 },
     military: { soldiers: 1 },
   }),
 
   archer: defineUnit({
+    actionPoints: 1,
+    costs: { bows: 1 },
+    rates: { food_rate: -1 },
+    military: { archers: 1 },
+  }),
+  infantry: defineUnit({
+    actionPoints: 1,
+    costs: { swords: 2 },
+    rates: { food_rate: -1 },
+    military: { archers: 1 },
+  }),
+  hussars: defineUnit({
+    actionPoints: 1,
+    costs: { bows: 2 },
+    rates: { food_rate: -1 },
+    military: { archers: 1 },
+  }),
+  gunners: defineUnit({
+    actionPoints: 1,
+    costs: { bows: 2 },
+    rates: { food_rate: -1 },
+    military: { archers: 1 },
+  }),
+  women_of_eger: defineUnit({
     actionPoints: 1,
     costs: { bows: 2 },
     rates: { food_rate: -1 },

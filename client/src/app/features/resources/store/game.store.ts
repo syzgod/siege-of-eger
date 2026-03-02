@@ -50,7 +50,7 @@ export const GameStore = signalStore(
         },
       });
     },
-    trainUnit(unitType: string): boolean {
+    trainUnits(unitType: string): boolean {
       const current = store.gameState();
       const def = UNIT_DEFINITIONS[unitType];
 
@@ -83,8 +83,8 @@ export const GameStore = signalStore(
 
       return true;
     },
-    trainGuard(): boolean {
-      return this.trainUnit('guard');
+    trainUnit(unit: string): boolean {
+      return this.trainUnits(unit);
     },
   })),
   withHooks({

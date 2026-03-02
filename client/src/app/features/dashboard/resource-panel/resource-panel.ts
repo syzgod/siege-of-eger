@@ -51,24 +51,6 @@ export class ResourcePanel {
         accentColor: 'var(--color-blood)',
         rate: s?.food_rate,
       },
-      {
-        label: 'Swords',
-        icon: '⚔️',
-        value: s?.resources?.swords ?? '--',
-        accentColor: 'var(--color-iron)',
-      },
-      {
-        label: 'Spears',
-        icon: '🔱',
-        value: s?.resources?.spears ?? '--',
-        accentColor: 'var(--color-wood)',
-      },
-      {
-        label: 'Bows',
-        icon: '🏹',
-        value: s?.resources?.bows ?? '--',
-        accentColor: 'var(--color-wood)',
-      },
     ];
   });
 }

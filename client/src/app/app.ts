@@ -33,7 +33,8 @@ export class App {
   }
 
   onTrain(unit: string) {
-    this.gameStore.trainGuard();
+    // BUG we want to train every unit from this function not just guard, so we need a generic function in the store
+    this.gameStore.trainUnit(unit);
     console.log(`Training: ${unit}`);
   }
 
