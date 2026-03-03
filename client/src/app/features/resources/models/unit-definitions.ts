@@ -8,6 +8,7 @@ export interface UnitCost {
 
 interface UnitConfig {
   actionPoints: number;
+  defensePower: number;
   costs: Partial<GameState['resources']>;
   rates?: Partial<
     Pick<GameState, 'food_rate' | 'gold_rate' | 'wood_rate' | 'iron_rate' | 'stone_rate'>
@@ -72,6 +73,7 @@ function defineUnit(config: UnitConfig): UnitCost {
 export const UNIT_DEFINITIONS: Record<string, UnitCost> = {
   guard: defineUnit({
     actionPoints: 1,
+    defensePower: 1,
     costs: { spears: 1 },
     rates: { food_rate: -1 },
     military: { guards: 1 },
@@ -79,6 +81,7 @@ export const UNIT_DEFINITIONS: Record<string, UnitCost> = {
 
   soldier: defineUnit({
     actionPoints: 1,
+    defensePower: 1,
     costs: { swords: 1, iron: 1 },
     rates: { food_rate: -1 },
     military: { soldiers: 1 },
@@ -86,32 +89,39 @@ export const UNIT_DEFINITIONS: Record<string, UnitCost> = {
 
   archer: defineUnit({
     actionPoints: 1,
+    defensePower: 2,
     costs: { bows: 1 },
     rates: { food_rate: -1 },
     military: { archers: 1 },
   }),
   infantry: defineUnit({
     actionPoints: 1,
+    defensePower: 2,
     costs: { swords: 2 },
     rates: { food_rate: -1 },
     military: { archers: 1 },
   }),
   hussars: defineUnit({
     actionPoints: 1,
+    defensePower: 2,
     costs: { bows: 2 },
     rates: { food_rate: -1 },
     military: { archers: 1 },
   }),
   gunners: defineUnit({
     actionPoints: 1,
+    defensePower: 5,
     costs: { bows: 2 },
     rates: { food_rate: -1 },
     military: { archers: 1 },
   }),
   women_of_eger: defineUnit({
     actionPoints: 1,
+    defensePower: 1,
     costs: { bows: 2 },
     rates: { food_rate: -1 },
     military: { archers: 1 },
   }),
 };
+
+// TODO Defense power calculation by unit(guard, infantry, gunners, hussar), heroes(captain), walls, towers and cannons (number of unit * power weight, wall multiplier, tower multiplier, cannon high power),

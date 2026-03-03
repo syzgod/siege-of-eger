@@ -98,3 +98,5 @@ export const GameStore = signalStore(
     },
   }),
 );
+
+//TODO Create batch training, 1 training 50 units, reflect in UI, determine the Ottoman army power so we can match with the defense

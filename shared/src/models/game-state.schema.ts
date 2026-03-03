@@ -6,6 +6,7 @@ export const RawGameStateSchema = z.object({
   days_remaining: z.number().default(30),
   action_points: z.number().default(5),
   wall_health: z.number().default(100),
+  defense_power: z.number().default(1000),
   gold: z.number().min(0),
   wood: z.number().min(0),
   iron: z.number().min(0),
@@ -35,6 +36,7 @@ export const GameStateSchema = RawGameStateSchema.transform((db) => ({
     daysRemaining: db.days_remaining,
     actionPoints: db.action_points,
     wallHealth: db.wall_health,
+    defensePower: db.defense_power,
   },
   resources: {
     gold: db.gold,
