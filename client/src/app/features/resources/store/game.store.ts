@@ -54,7 +54,7 @@ export const GameStore = signalStore(
       const current = store.gameState();
       const def = UNIT_DEFINITIONS[unitType];
 
-      if (!current || !def || current.population.peasants < 1) {
+      if (!current || !def || current.population.volunteers < 1) {
         console.warn('No peasants left to train!');
         return false;
       }
@@ -72,7 +72,7 @@ export const GameStore = signalStore(
           ...updatedByDef,
           population: {
             ...updatedByDef.population,
-            peasants: updatedByDef.population.peasants - 1,
+            volunteers: updatedByDef.population.volunteers - 1,
           },
           status: {
             ...updatedByDef.status,

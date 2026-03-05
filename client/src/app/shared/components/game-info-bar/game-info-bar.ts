@@ -76,7 +76,7 @@ export class GameInfoBar {
   protected readonly militaryItems = computed(() => {
     const s = this.gameStore.gameState();
     return [
-      { label: '🛡️ Guards', value: s?.military?.guards ?? '--' },
+      { label: '🛡️ Hussars', value: s?.military?.hussars ?? '--' },
       { label: '⚔️ Soldiers', value: s?.military?.soldiers ?? '--' },
       { label: '🏹 Archers', value: s?.military?.archers ?? '--' },
       { label: '🔥 Morale', value: s?.morale != null ? s.morale + '%' : '--' },
