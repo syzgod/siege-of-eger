@@ -7,7 +7,7 @@ import {
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 
 import { ConfigService } from '@nestjs/config';
-import { RawGameStateSchema } from '../../../shared/src/models/game-state.schema';
+import { RawGameStateSchema } from '@eger/shared';
 import { z } from 'zod';
 
 type RawGameState = z.infer<typeof RawGameStateSchema>;

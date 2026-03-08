@@ -35,7 +35,8 @@
     "primeng": "^21.1.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "@eger/shared": "workspace:*"
   },
   "devDependencies": {
     "@analogjs/vite-plugin-angular": "^2.3.0",

@@ -13,11 +13,9 @@
     "target": "ES2023",
     "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": "../",
     "baseUrl": "./",
     "paths": {
-      "@server/*": ["src/*"],
-      "@shared/*": ["../shared/src/*"]
+      "@server/*": ["src/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
@@ -27,5 +25,5 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": ["src/**/*.ts", "../shared/src/**/*.ts"]
+  "include": ["src/**/*.ts"]
 }
