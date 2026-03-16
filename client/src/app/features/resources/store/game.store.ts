@@ -1,7 +1,7 @@
 import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
 
+import { Campaign } from '@shared/schemas/campaign.schema';
 import { GameApiService } from '../../../core/services/game-api.service';
-import { GameState } from '@shared/models/game-state.schema';
 import { UNIT_DEFINITIONS } from '../models/unit-definitions';
 import { effect } from '@angular/core';
 import { inject } from '@angular/core';
@@ -9,24 +9,9 @@ import { inject } from '@angular/core';
 export const GameStore = signalStore(
   { providedIn: 'root' },
   withState({
-    gameState: null as GameState | null,
+    gameState: null as Campaign | null,
   }),
   withMethods((store) => ({
-    spendResources(gold: number, wood: number) {
-      const current = store.gameState();
-      if (!current) return;
-
-      patchState(store, {
-        gameState: {
-          ...current,
-          resources: {
-            ...current.resources,
-            gold: current.resources.gold - gold,
-            wood: current.resources.wood - wood,
-          },
-        },
-      });
-    },
     advanceDay() {
       const current = store.gameState();
       if (!current) return;
@@ -34,18 +19,12 @@ export const GameStore = signalStore(
         gameState: {
           ...current,
           day: current.day + 1,
+          morale: current.morale - 1,
           status: {
             ...current.status,
             daysRemaining: Math.max(0, current.status.daysRemaining - 1),
             actionPoints: current.status.actionPoints + 5,
-          },
-          resources: {
-            ...current.resources,
-            gold: current.resources.gold + current.gold_rate,
-            wood: current.resources.wood + current.wood_rate,
-            iron: current.resources.iron + current.iron_rate,
-            stone: current.resources.stone + current.stone_rate,
-            food: current.resources.food + current.food_rate,
+            wallIntegrity: current.status.wallIntegrity - 1,
           },
         },
       });
@@ -54,7 +33,7 @@ export const GameStore = signalStore(
       const current = store.gameState();
       const def = UNIT_DEFINITIONS[unitType];
 
-      if (!current || !def || current.population.volunteers < 1) {
+      if (!current || !def || current.status.totalPopulation < 1) {
         console.warn('No peasants left to train!');
         return false;
       }

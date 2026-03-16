@@ -60,8 +60,7 @@
               (pressed)="train.emit('guard')"
               [disabled]="
                 (gameStore.gameState()?.status?.actionPoints ?? 0) < 1 ||
-                (gameStore.gameState()?.resources?.spears ?? 0) < 1 ||
-                (gameStore.gameState()?.population?.volunteers ?? 0) < 1
+                (gameStore.gameState()?.status?.totalPopulation ?? 0) < 1
               "
               [disabledReason]="getGuardDisabledReason()"
             />
@@ -72,8 +71,7 @@
               (pressed)="train.emit('archer')"
               [disabled]="
                 (gameStore.gameState()?.status?.actionPoints ?? 0) < 1 ||
-                (gameStore.gameState()?.resources?.bows ?? 0) < 1 ||
-                (gameStore.gameState()?.population?.volunteers ?? 0) < 1
+                (gameStore.gameState()?.status?.totalPopulation ?? 0) < 1
               "
             />
             <app-action-btn
@@ -82,8 +80,7 @@
               (pressed)="train.emit('soldier')"
               [disabled]="
                 (gameStore.gameState()?.status?.actionPoints ?? 0) < 1 ||
-                (gameStore.gameState()?.resources?.swords ?? 0) < 1 ||
-                (gameStore.gameState()?.population?.volunteers ?? 0) < 1
+                (gameStore.gameState()?.status?.totalPopulation ?? 0) < 1
               "
             />
             <app-action-btn label="Spearman" icon="🔱" (pressed)="train.emit('spearman')" />
