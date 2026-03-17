@@ -1,6 +1,9 @@
 import z from 'zod';
 
-export const GamePhaseSchema = z.object({
-  workGroupId: z.string().uuid(),
-  gamePhases: z.enum(['Preparation', 'Siege', 'Defeat', 'Victory']),
-});
+export const GamePhaseEnum = z.enum([
+  'PREPARATION',
+  'SIEGE',
+  'DEFEAT',
+  'VICTORY',
+]);
+export type GamePhaseDTO = z.infer<typeof GamePhaseEnum>;
