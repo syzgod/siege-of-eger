@@ -2,6 +2,7 @@ import { HydratedTroop, HydratedTroopDto } from '@eger/shared';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 import { ConfigService } from '@nestjs/config';
+import { WorkerActionDTO } from '@eger/shared';
 import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 
@@ -49,5 +50,13 @@ export class GarrisonService {
       console.error('Zod Validation Failed:', validationError);
       throw new InternalServerErrorException('Database schema mismatch');
     }
+  }
+  handleWorkerAction(data: WorkerActionDTO) {
+    console.log(`Task ${data.action} added to ${data.workerId}`);
+    return {
+      status: 'success',
+      message: 'Action added to the worker successfully',
+      data: data,
+    };
   }
 }

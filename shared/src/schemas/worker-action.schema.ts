@@ -8,9 +8,9 @@ export const WorkerActionEnum = z.enum([
 ]);
 export type WorkerAction = z.infer<typeof WorkerActionEnum>;
 
-export const AssignWorkerSchema = z.object({
+export const WorkerActionSchema = z.object({
   workerId: z.string().uuid(),
   action: WorkerActionEnum,
 });
 
-export type AssignWorkerDTO = z.infer<typeof AssignWorkerSchema>;
+export type WorkerActionDTO = z.infer<typeof WorkerActionSchema>;
