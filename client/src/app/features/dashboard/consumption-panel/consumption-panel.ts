@@ -15,8 +15,7 @@ export class ConsumptionPanel {
 
   protected readonly items = computed<StatCardData[]>(() => {
     const s = this.store.gameState();
-    const troops =
-      (s?.military?.guards ?? 0) + (s?.military?.soldiers ?? 0) + (s?.military?.archers ?? 0);
+    const troops = 0;
 
     return [
       {

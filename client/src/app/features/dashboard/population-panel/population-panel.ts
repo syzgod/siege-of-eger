@@ -15,9 +15,9 @@ export class PopulationPanel {
 
   protected readonly items = computed<StatCardData[]>(() => {
     const s = this.store.gameState();
-    const peasants = s?.population?.peasants ?? 0;
-    const civilians = s?.population?.civilians ?? 0;
-    const wounded = s?.population?.wounded ?? 0;
+    const peasants = 0;
+    const civilians = 0;
+    const wounded = 0;
 
     return [
       {

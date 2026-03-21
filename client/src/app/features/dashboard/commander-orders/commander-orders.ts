@@ -20,21 +20,4 @@ export class CommanderOrders {
   readonly repair = output<string>();
 
   protected readonly gameStore = inject(GameStore);
-
-  getGuardDisabledReason(): string {
-    const state = this.gameStore.gameState();
-    const reasons: string[] = [];
-
-    if ((state?.status?.actionPoints ?? 0) < 1) {
-      reasons.push('Not enough action points (need 1)');
-    }
-    if ((state?.resources?.spears ?? 0) < 1) {
-      reasons.push('Not enough spears (need 1)');
-    }
-    if ((state?.population?.peasants ?? 0) < 1) {
-      reasons.push('No peasants available to train');
-    }
-
-    return reasons.join('; ');
-  }
 }

@@ -19,19 +19,19 @@ export class ArmoryPanel {
       {
         label: 'Swords',
         icon: '⚔️',
-        value: s?.resources?.swords ?? '--',
+        value: '--',
         accentColor: 'var(--color-iron)',
       },
       {
         label: 'Spears',
         icon: '🔱',
-        value: s?.resources?.spears ?? '--',
+        value: '--',
         accentColor: 'var(--color-wood)',
       },
       {
         label: 'Bows',
         icon: '🏹',
-        value: s?.resources?.bows ?? '--',
+        value: '--',
         accentColor: 'var(--color-wood)',
       },
     ];

@@ -22,7 +22,7 @@ export class StatusBar {
     () => this.gameStore.gameState()?.status?.actionPoints ?? 0,
   );
   protected readonly wallHealth = computed(
-    () => this.gameStore.gameState()?.status?.wallHealth ?? 0,
+    () => this.gameStore.gameState()?.status?.wallIntegrity ?? 0,
   );
   protected readonly morale = computed(() => this.gameStore.gameState()?.morale ?? 0);
 }

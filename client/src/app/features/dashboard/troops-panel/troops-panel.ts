@@ -19,19 +19,19 @@ export class TroopsPanel {
       {
         label: 'Guards',
         icon: '🛡️',
-        value: s?.military?.guards ?? '--',
+        value: '--',
         accentColor: 'var(--color-iron)',
       },
       {
         label: 'Soldiers',
         icon: '⚔️',
-        value: s?.military?.soldiers ?? '--',
+        value: '--',
         accentColor: 'var(--color-iron)',
       },
       {
         label: 'Archers',
         icon: '🏹',
-        value: s?.military?.archers ?? '--',
+        value: '--',
         accentColor: 'var(--color-iron)',
       },
     ];

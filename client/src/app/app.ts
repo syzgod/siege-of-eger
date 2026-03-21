@@ -32,11 +32,11 @@ export class App {
     console.log(`Crafting: ${item}`);
   }
 
-  onTrain(unit: string) {
-    // BUG we want to train every unit from this function not just guard, so we need a generic function in the store
-    this.gameStore.trainUnit(unit);
-    console.log(`Training: ${unit}`);
-  }
+  // onTrain(unit: string) {
+  //   // BUG we want to train every unit from this function not just guard, so we need a generic function in the store
+  //   this.gameStore.trainUnit(unit);
+  //   console.log(`Training: ${unit}`);
+  // }
 
   onRepair(target: string) {
     console.log(`Repairing: ${target}`);

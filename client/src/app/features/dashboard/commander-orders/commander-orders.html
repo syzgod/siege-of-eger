@@ -62,7 +62,6 @@
                 (gameStore.gameState()?.status?.actionPoints ?? 0) < 1 ||
                 (gameStore.gameState()?.status?.totalPopulation ?? 0) < 1
               "
-              [disabledReason]="getGuardDisabledReason()"
             />
             <app-action-btn label="Gunner" icon="💥" (pressed)="train.emit('gunner')" />
             <app-action-btn

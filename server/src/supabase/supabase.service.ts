@@ -7,15 +7,15 @@ import {
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 
 import { ConfigService } from '@nestjs/config';
-import { RawGameStateSchema } from '@eger/shared';
+import { RawCampaignSchema } from '@eger/shared';
 import { z } from 'zod';
 
-type RawGameState = z.infer<typeof RawGameStateSchema>;
+type RawGameState = z.infer<typeof RawCampaignSchema>;
 
 type Database = {
   public: {
     Tables: {
-      game_state: {
+      campaigns: {
         Row: RawGameState;
       };
     };
@@ -42,7 +42,7 @@ export class SupabaseService {
 
   async getGameState(): Promise<RawGameState> {
     const { data, error } = await this.supabase
-      .from('game_state')
+      .from('campaigns')
       .select('*')
       .single();
 
@@ -62,7 +62,7 @@ export class SupabaseService {
       );
     }
 
-    const parsedState = RawGameStateSchema.safeParse(data);
+    const parsedState = RawCampaignSchema.safeParse(data);
 
     if (!parsedState.success) {
       this.logger.warn(

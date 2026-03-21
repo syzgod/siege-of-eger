@@ -2,7 +2,7 @@ import { patchState, signalStore, withHooks, withMethods, withState } from '@ngr
 
 import { Campaign } from '@shared/schemas/campaign.schema';
 import { GameApiService } from '../../../core/services/game-api.service';
-import { UNIT_DEFINITIONS } from '../models/unit-definitions';
+// import { UNIT_DEFINITIONS } from '../models/unit-definitions';
 import { effect } from '@angular/core';
 import { inject } from '@angular/core';
 
@@ -29,42 +29,42 @@ export const GameStore = signalStore(
         },
       });
     },
-    trainUnits(unitType: string): boolean {
-      const current = store.gameState();
-      const def = UNIT_DEFINITIONS[unitType];
-
-      if (!current || !def || current.status.totalPopulation < 1) {
-        console.warn('No peasants left to train!');
-        return false;
-      }
-
-      // Check resource costs and action points
-      if (!def.canAfford(current) || current.status.actionPoints < def.actionPoints) {
-        console.warn('Cannot afford a guard (Check AP or Spears)!');
-        return false;
-      }
-
-      // Apply costs and deduct AP
-      const updatedByDef = def.apply(current);
-      patchState(store, {
-        gameState: {
-          ...updatedByDef,
-          population: {
-            ...updatedByDef.population,
-            volunteers: updatedByDef.population.volunteers - 1,
-          },
-          status: {
-            ...updatedByDef.status,
-            actionPoints: updatedByDef.status.actionPoints - def.actionPoints,
-          },
-        },
-      });
-
-      return true;
-    },
-    trainUnit(unit: string): boolean {
-      return this.trainUnits(unit);
-    },
+    //     trainUnits(unitType: string): boolean {
+    //       const current = store.gameState();
+    //       const def = UNIT_DEFINITIONS[unitType];
+    //
+    //       if (!current || !def || current.status.totalPopulation < 1) {
+    //         console.warn('No peasants left to train!');
+    //         return false;
+    //       }
+    //
+    //       // Check resource costs and action points
+    //       if (!def.canAfford(current) || current.status.actionPoints < def.actionPoints) {
+    //         console.warn('Cannot afford a guard (Check AP or Spears)!');
+    //         return false;
+    //       }
+    //
+    //       // Apply costs and deduct AP
+    //       const updatedByDef = def.apply(current);
+    //       patchState(store, {
+    //         gameState: {
+    //           ...updatedByDef,
+    //           population: {
+    //             ...updatedByDef.population,
+    //             volunteers: updatedByDef.population.volunteers - 1,
+    //           },
+    //           status: {
+    //             ...updatedByDef.status,
+    //             actionPoints: updatedByDef.status.actionPoints - def.actionPoints,
+    //           },
+    //         },
+    //       });
+    //
+    //       return true;
+    //     },
+    // trainUnit(unit: string): boolean {
+    //   return this.trainUnits(unit);
+    // },
   })),
   withHooks({
     onInit(store, api = inject(GameApiService)) {

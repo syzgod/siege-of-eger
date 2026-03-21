@@ -22,7 +22,7 @@ export class GameInfoBar {
     () => this.gameStore.gameState()?.status?.actionPoints ?? 0,
   );
   protected readonly wallHealth = computed(
-    () => this.gameStore.gameState()?.status?.wallHealth ?? 0,
+    () => this.gameStore.gameState()?.status?.wallIntegrity ?? 0,
   );
 
   /** Action points as a percentage (max 5 AP) */
@@ -36,37 +36,37 @@ export class GameInfoBar {
     return [
       {
         label: '🪙 Gold',
-        value: s?.resources?.gold ?? '--',
+        value: '--',
         color: 'var(--color-gold)',
-        rate: s?.gold_rate,
+        rate: 1,
       },
       {
         label: '🪵 Wood',
-        value: s?.resources?.wood ?? '--',
+        value: '--',
         color: 'var(--color-wood)',
-        rate: s?.wood_rate,
+        rate: 1,
       },
       {
         label: '⛏️ Iron',
-        value: s?.resources?.iron ?? '--',
+        value: '--',
         color: 'var(--color-iron)',
-        rate: s?.iron_rate,
+        rate: 1,
       },
       {
         label: '🪨 Stone',
-        value: s?.resources?.stone ?? '--',
+        value: '--',
         color: '#8d8d8d',
-        rate: s?.stone_rate,
+        rate: 1,
       },
       {
         label: '🍖 Food',
-        value: s?.resources?.food ?? '--',
+        value: '--',
         color: 'var(--color-blood)',
-        rate: s?.food_rate,
+        rate: 1,
       },
       {
         label: '⚔️ Swords',
-        value: s?.resources?.swords ?? '--',
+        value: '--',
         color: 'var(--color-iron)',
         rate: undefined,
       },
@@ -76,9 +76,9 @@ export class GameInfoBar {
   protected readonly militaryItems = computed(() => {
     const s = this.gameStore.gameState();
     return [
-      { label: '🛡️ Hussars', value: s?.military?.hussars ?? '--' },
-      { label: '⚔️ Soldiers', value: s?.military?.soldiers ?? '--' },
-      { label: '🏹 Archers', value: s?.military?.archers ?? '--' },
+      { label: '🛡️ Hussars', value: '--' },
+      { label: '⚔️ Soldiers', value: '--' },
+      { label: '🏹 Archers', value: '--' },
       { label: '🔥 Morale', value: s?.morale != null ? s.morale + '%' : '--' },
     ];
   });
